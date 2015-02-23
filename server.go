@@ -9,7 +9,7 @@ func main() {
 		if r.Host != "" {
 			http.Redirect(w, r, "http://www."+r.Host, http.StatusMovedPermanently)
 		} else {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, "Host header must be specified", http.StatusBadRequest)
 		}
 	})
 	http.ListenAndServe(":80", nil)
